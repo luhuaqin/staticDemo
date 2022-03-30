@@ -1,0 +1,170 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.div1 {
+	width: 100%;
+	height: 103px;
+	border-bottom: 4px red solid;
+	position: fixed;
+	top: 0;
+	background-color: white;
+}
+.div1 .div1_1 {
+	width: 1100px;
+	height: 100%;
+	/*border-right: 1px solid red;
+	border-left: 1px solid red;*/
+	margin: 0 auto;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.div1 .div1_1 img {
+	width: 180px;
+}
+.div1 .div1_1 ul {
+	list-style: none;
+	width: 950px;
+	display: flex;
+	justify-content: space-around;
+	font-size: 18px;
+	right: 0;
+}
+.div1 .div1_1 ul li {
+	float: left;
+}
+.div1 .div1_1 ul span {
+	color: gray;
+	font-weight: 500;
+}
+.div1 .div1_1 ul li a {
+	text-decoration: none;
+	color: gray;
+	font-weight: 500;
+}
+.div1 .div1_1 ul li:first-child a{
+	color: red !important;
+}
+.div2 {
+	width: 100%;
+	height: 1000px;
+	/*border-bottom: 2px red solid;*/
+	background-color: beige;
+	margin-top: 107px;
+	/*position: fixed;*/
+}
+#maTo2D {
+	width: 145px;
+	height: 200px;
+	background-color: white;
+	position: fixed;
+	bottom: 150px;
+	left: -75px;
+    transform: translateX(0);
+    transition: transform 0.4s;
+}
+#maTo2D:hover {
+	transform: translateX(75px);
+    transition: transform 0.4s;
+
+}
+#maTo2D .borderLine {
+	margin: 8px;
+	border: 2px solid #ffedf1;
+	padding: 20px;
+}
+#maTo2D .borderLine img {
+	width: 100%;
+}
+#maTo2D .borderLine .bottomFont {
+	color: #666;
+	margin-top: 10px;
+	font-size: 14px;
+	text-align: center;
+}
+#sideLi {
+	position: fixed;
+	left: 91%;
+	margin-right: 100px;
+	list-style: none;
+	bottom: 20px;
+	width: 50px;
+}
+#sideLi li {
+	position: relative;
+	height: 45px;
+	width: 100%;
+	/*border: 1px solid red;*/
+	border-radius: 2px;
+	background-image: url(img/bdliother.png);
+	background-position-y: -2px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin-bottom: 2px;
+	overflow: hidden;
+}
+#sideLi li a {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	line-height: 45px;
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+	background-color: #18448e;
+	font-size: 12px;
+	text-align: center;
+	/*设置旋转中心*/
+	transform-origin: -50% 50%;
+	/*旋转角度*/
+	transform: rotateZ(90deg);
+	/*改变动画*/
+	transition: transform 0.3s;
+} 
+#sideLi li:hover a {
+	/*旋转角度*/
+	transform: rotateZ(0deg);
+	/*改变动画*/
+	/*transition: transform 0.3s;*/
+}
+#sideLi .longer {
+	width: 100%;
+	height: 90px;
+}
+#sideLi .helpMode {
+	background-image: url(img/bdlihelp.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 100%;
+}
+#sideLi .helpMode {
+	background-image: url(img/bdlihelp.png);
+}
+#sideLi .yaoyan {
+	background-image: url(img/bdlitop.png);
+}
+#sideLi .yaoyan a {
+	line-height: 90px;
+	transform-origin: -100% 50%;
+}
+#sideLi .harmful {
+	background-image: url(img/bdlisecond.png);
+}
+#sideLi .harmful a {
+	line-height: 90px;
+	transform-origin: -100% 50%;
+}
+#sideLi .shouCang {
+	background-position-y: -56px;
+}
+#sideLi .query {
+	background-position-y: -214px;
+}
+#sideLi .question {
+	background-position-y: -268px;
+}
+#sideLi .up {
+	background-position-y: -320px;
+}
