@@ -55,3 +55,40 @@ dlgQueryBtn.onclick = function() {
 closeBtn.onclick = function() {
 	queryDialog.style.display = "none"
 }
+
+// 放大镜功能
+let smallDiv = document.getElementById("smallDiv")
+let smallImg = document.getElementById("smallImg")
+let moveDiv = document.getElementById("move")
+let bigDiv = document.getElementById("bigDiv")
+let bigImg = document.getElementById("bigImg")
+smallDiv.onmousemove = function(event) {
+	// 获取鼠标并移动鼠标位置
+	let x = event.pageX - smallDiv.offsetLeft - moveDiv.offsetWidth/2
+	let y = event.pageY - smallDiv.offsetTop - moveDiv.offsetHeight/2
+	if(x <= 0) {
+		x = 0
+	}else if(x > smallDiv.offsetWidth - moveDiv.offsetWidth) {
+		x = smallDiv.offsetWidth - moveDiv.offsetWidth
+	}
+	if(y < 0) {
+		y = 0
+	}else if(y > smallDiv.offsetHeight - moveDiv.offsetHeight) {
+		y = smallDiv.offsetHeight - moveDiv.offsetHeight
+	}
+	moveDiv.style.left = x + 'px'
+	moveDiv.style.top = y + 'px'
+	// 获取大图位置，并移动大图
+	bigImg.style.left = - (x * bigImg.offsetWidth/smallImg.offsetWidth) + "px"
+  bigImg.style.top = - (y * bigImg.offsetHeight/smallImg.offsetHeight) + "px"
+}
+smallDiv.onmouseover = function() {
+	// 鼠标移入移动div和大图div显示
+	moveDiv.style.display = "block"
+	bigDiv.style.display = "block"
+}
+smallDiv.onmouseleave = function() {
+	// 鼠标离开移动div和大图div不显示
+	moveDiv.style.display = "none"
+	bigDiv.style.display = "none"
+}

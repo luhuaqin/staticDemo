@@ -49,7 +49,6 @@
 }
 .div2 {
 	width: 100%;
-	height: 1000px;
 	/*border-bottom: 2px red solid;*/
 	background-color: white;
 	margin-top: 107px;
@@ -67,6 +66,49 @@
     line-height: 30px;
     margin-bottom: 12px;
     font-size: 15px;
+}
+.div2 .div2_1 #enlarge {
+	width: 100%;
+	height: 300px;
+	/* border: 1px solid red; */
+}
+.div2 .div2_1 #enlarge #smallDiv {
+	width: 150px;
+	height: 50%;
+	float: left;
+	position: relative;
+}
+.div2 .div2_1 #enlarge #smallDiv img {
+	width: 100%;
+	height: 100%;
+}
+.div2 .div2_1 #enlarge #smallDiv #move {
+	/* 
+		w: 小div宽=大div宽：大图
+		w: 150 = 300 : 600
+		w: 1 = 300: 4
+		h: 小div高 = 大div高：大图
+	*/
+	width: 75px;
+	height: 75px;
+	background-color: rgba(255, 187, 108, 0.4);
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.div2 .div2_1 #enlarge #bigDiv {
+	width: 300px;
+	height: 100%;
+	float: left;
+	overflow: hidden;
+	margin-left: 5px;
+	position: relative;
+	display: none;
+}
+.div2 .div2_1 #enlarge #bigDiv #bigImg {
+	position: absolute;
+	/* left: 10px; */
 }
 #queryDialog {
 	position: fixed;
@@ -230,4 +272,5 @@
 	display: none;
 }
 #sideLi #up:hover {
-	background-position-y: -373px;}
+	background-position-y: -373px;
+}
