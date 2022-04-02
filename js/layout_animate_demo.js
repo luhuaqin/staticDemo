@@ -92,3 +92,22 @@ smallDiv.onmouseleave = function() {
 	moveDiv.style.display = "none"
 	bigDiv.style.display = "none"
 }
+
+// 手风琴
+// let liClass = document.getElementsByClassName('changeClass')
+// let onClass = document.querySelector('.changeClass.on');
+// for(let i = 0; i < liClass.length; i ++) {
+// 	liClass.onmouseover = function() {
+// 		console.log(111)
+// 		if(onClass) {
+// 			liClass.classList.toggle('on')
+// 		}
+// 		liClass.classList.toggle('on')
+// 	}
+// }
+
+$('.shouFengqin ul li').hover(function() {
+	$(this).addClass('on').siblings().removeClass("on")
+})
+
+
