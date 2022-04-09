@@ -96,18 +96,18 @@ smallDiv.onmouseleave = function() {
 // 手风琴
 let liClass = document.getElementsByClassName('changeClass')
 // 用原生js控制鼠标移入或离开鼠标控制类on，有缺陷
-for(let i = 0; i < liClass.length; i ++) {
-	liClass[i].onmouseover = function() {
-		liClass[i].classList.add('on')
-	}
-	liClass[i].onmouseleave = function() {
-		liClass[i].classList.remove('on')
-	}
-}
+// for(let i = 0; i < liClass.length; i ++) {
+// 	liClass[i].onmouseover = function() {
+// 		liClass[i].classList.add('on')
+// 	}
+// 	liClass[i].onmouseleave = function() {
+// 		liClass[i].classList.remove('on')
+// 	}
+// }
 
 // 通过调用jq获取所有兄弟节点的方法控制类on
-// $('.shouFengqin ul li').hover(function() {
-// 	$(this).addClass('on').siblings().removeClass("on")
-// })
+$('.shouFengqin ul li').hover(function() {
+	$(this).addClass('on').siblings().removeClass("on")
+})
 
 

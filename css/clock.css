@@ -1,0 +1,112 @@
+.clock {
+  position: fixed;
+  top: 110px;
+  left: 16px;
+  width: 160px;
+  height: 160px;
+  border: 5px solid #88d9d0;
+  border-radius: 50%;
+  background-color: #bdeefb;
+}
+.positionC {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.mark {
+  position: absolute;
+}
+.twe {
+  top: 0;
+  left: 44%;
+}
+.thr {
+  top: 44%;
+  left: 94%;
+}
+.six {
+  top: 88%;
+  left: 46%;
+}
+.nine {
+  top: 44%;
+  left: 0;
+}
+.center {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #000 !important;
+  top: 48%;
+  left: 48%;
+}
+.hand {
+  position: absolute;
+  left: 50%;
+  background-color: #fff;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  /* 旋转点 */
+  transform-origin: 0;
+}
+
+.hour {
+  top: 48%;
+  width: 28%;
+  height: 5%;
+}
+.min {
+  top: 49%;
+  width: 33%;
+  height: 3%;
+}
+.sec {
+  top: 50%;
+  width: 45%;
+  height: 1%;
+}
+
+.weekday {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 46%;
+  left: 70%;
+  width: 18%;
+  font-size: xx-small;
+}
+.weekday span {
+  background-color: #fff;
+}
+.time {
+  background-color: #fff;
+  position: absolute;
+  width: 30%;
+  top: 78%;
+  left: 35%;
+  font-size: xx-small;
+}
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #000;
+  text-align: center;
+  line-height: 150px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease-in-out;
+
+}
+.clock:hover .cover {
+  transform: scale(1);
+  opacity: 0.4;
+}

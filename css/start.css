@@ -1,0 +1,39 @@
+.start {
+  position: relative;
+  width: 60%;
+  height: 80px;
+  margin: 0 auto;
+  background-color: aliceblue !important;
+}
+.start ul {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.start li {
+  width: 50px;
+  height: 50px;
+}
+.start li span {
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+}
+.start li .start1 {
+  background: url(../img/点亮.png) no-repeat;
+}
+.start li .start0 {
+  /* display: none; */
+  background: url(../img/未点亮.png) no-repeat;
+}
+
+.start li .text {
+  line-height: 50px;
+  font-weight: 600;
+}
