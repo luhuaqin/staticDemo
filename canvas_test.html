@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #draw {
+      background-color: rgba(0, 0, 0, .3);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="draw" width="300px" height="300px">
+    您的浏览器不兼容canvas，请升级
+  </canvas>
+
+  <script>
+    console.log('%c object', 'background: red; color: white; font-size: 20px');
+    window.onload = function() {
+      const canvas = document.getElementById('draw');
+      // console.log('%O',canvas)
+      if(!canvas.getContext) return
+      const ctx = canvas.getContext('2d');  // 2d | webgl
+      console.log(ctx)
+
+      ctx.fillRect(1, 1, 20, 20) // 绘制矩形fillRect(x轴起始位置, y轴起始位置, 宽, 高)
+      ctx.save() // 保存路径
+      ctx.translate(120, 0) // 平移坐标系
+      ctx.scale(4, 4) // 对坐标轴放大2倍
+      ctx.rotate(Math.PI / 180 * 45); // 旋转45弧度
+      ctx.strokeRect(0, 0, 20, 20) // 绘制矩形边框(x轴起始位置, y轴起始位置, 宽, 高)
+      ctx.restore() // 恢复保存之前的路径
+      ctx.clearRect(5, 5, 5, 5) // 清楚区域(x轴起始位置, y轴起始位置, 宽, 高)
+
+      // 路径
+      ctx.fillStyle = 'rgba(255,0,0,0.2)'
+      ctx.font = '18px Microsoft Yahei'
+      ctx.textAlign = 'center'
+      ctx.strokeStyle = 'blue'
+      // ctx.textBaseline = 'top'
+      ctx.beginPath()
+      ctx.moveTo(30, 0)
+      ctx.lineTo(60, 0)
+      ctx.lineTo(60, 30)
+      ctx.lineTo(30, 0)
+      // ctx.fillText('欠', 50, 15)
+      ctx.strokeText('欠', 50, 15)
+      ctx.fill()
+
+      // 图片
+      const image = new Image();
+      image.src = './img/small.jpg'
+      image.onload = function() {
+        // 绘制图片
+        ctx.drawImage(image, 0, 30, 100, 100)
+
+        // 绘制路径(canvas也有显示顺序，写在后面的会显示在上层)
+        ctx.save() // 保存路径
+        ctx.fillStyle = 'yellow'
+        ctx.beginPath()
+        ctx.moveTo(10, 50)
+        ctx.lineTo(25, 50)
+        ctx.lineTo(12, 60)
+        ctx.lineTo(18, 43)
+        ctx.lineTo(23, 60)
+        ctx.lineTo(10, 50)
+        ctx.fill()
+        ctx.closePath()
+        ctx.rotate(Math.PI / 180 * 40)
+        ctx.restore() // 重绘
+      }
+
+      // 时钟（秒针）
+      drawSec()
+      let count = 0
+      setInterval(() => {
+        drawSec()
+      }, 1000)
+
+      function drawSec() {
+        count++
+        if(count >= 60) {
+          count = 0
+        }
+        // ctx.clearRect(0, 0, 300, 300); // 清空画布
+        ctx.save()
+
+        // 开始绘制
+        ctx.strokeStyle = 'red'
+
+        ctx.translate(200, 100)
+        ctx.rotate(Math.PI * 2 / 60 * count)
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, -80)
+        ctx.stroke()
+
+
+        ctx.restore()
+      }
+    }
+  </script>
+</body>
+</html>

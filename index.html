@@ -22,6 +22,63 @@
 				border-top: 5px solid transparent;
 				border-right: 5px solid transparent;
 			}
+			/* 图形验证 */
+			.check {
+				width: 400px;
+				height: 300px;
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				background-image: url(https://img0.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500);
+			}
+			.check::before {
+				content: '';
+				width: 50px;
+				height: 50px;
+				background: rgba(0, 0, 0, 0.5);
+				border: 1px solid #fff;
+				position: absolute;
+				top: 100px;
+				left: 280px;
+			}
+			.check-child {
+				content: '';
+				width: 50px;
+				height: 50px;
+				border: 1px solid #fff;
+				background-image: inherit;
+				background-repeat: inherit;
+				background-size: 400px 300px;
+				background-position: -280px -100px;
+				position: absolute;
+				top: 100px;
+				left: 10px;
+			}
+			.drag{
+				width: 400px;
+				height: 50px;
+				background-color: #e3e3e3;
+				margin-top: 10px;
+				position: relative;
+    	}
+			.drag-child{
+        width: 50px;
+        height: 50px;
+        background-color: aquamarine;
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        left: 0;
+    	}
+			.drag-tips{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: 95%;
+        height: 100%;
+        margin: 0 auto;
+        font-size: 12px;
+        color: #8a8a8a;
+    	}
 		</style>
 	</head>
 	<body>
@@ -31,5 +88,219 @@
 		<div class="div2">
 			
 		</div>
+		<div class="check">
+			<div class="check-child"></div>
+		</div>
+		<div class="drag">
+			<div class="drag-child"></div>
+			<div class="drag-tips">
+        <span>按住左边按钮向右拖动完成上方图像验证</span>
+    	</div>
+		</div>
+		<button class='up'>销量升序</button>
+    <button class='down'>销量降序</button>
+		<ul></ul>
 	</body>
+	<script>
+		// const success = () => {
+		// 	console.log('success')
+		// }
+		// // 底部长条拖动
+		// const drag = document.querySelector('.drag-child')
+		// const dragMouseDown = event => {
+		// 	document.addEventListener('mousemove', dragMouseMove)
+		// }
+		// const dragMouseMove = event => {
+		// 	const { offsetX } = event
+		// 	if(offsetX < 0 || offsetX > 350) {
+		// 		return
+		// 	}
+		// 	drag.style.transform = `translateX(${offsetX}px)`
+
+		// 	check.style.transform = `translateX(${offsetX}px)`
+		// 	if(offsetX >= 278 && offsetX <= 285){
+		// 			success()
+		// 	}
+		// }
+		// const dragMouseUp = event => {
+		// 	document.removeEventListener('mousemove', dragMouseMove)
+		// }
+		// document.addEventListener('mousedown', dragMouseDown)
+		// document.addEventListener('mouseup', dragMouseUp)
+
+		// // 校验区域联动
+		// const check = document.querySelector('.check-child')
+		// check.style.left = `${offsetX}px`
+
+		// 返回num个长度的数组，且数组每个元素为num
+		const fnc = (num) => {
+			// return [...Array(num)].map(() => num)
+			return [...Array(num)].fill(num)
+		}
+
+		console.log(fnc(7))
+
+		// 判断是否需要升级
+		const judgeFn = (oldTag, newTag) => {
+			console.log(Number(newTag), Number(oldTag)) // NaN NaN
+			return newTag === oldTag ? undefined : (newTag > oldTag) ? true : false
+		}
+
+		console.log(judgeFn("1.1.1", "1.0.1"))
+
+		// 返回n个[start, end]范围内的不同随机数数组
+		const randomArr = (range, n) => {
+			const list = []
+			for(i = 0 ; list.length < n; i ++) {
+				const randomNum = parseInt(Math.random() * range[1])
+				if(randomNum >= range[0] && randomNum <= range[1] && !list.includes(randomNum)) {
+					list.push(randomNum)
+				}
+			}
+			return list
+		}
+		console.log(randomArr([0, 10], 5))
+
+		// 排序
+		var cups = [{ type: 1, price: 100, color: 'black', sales: 3000, name: '牛客logo马克杯' },
+                { type: 2, price: 40, color: 'blue', sales: 1000, name: '无盖星空杯' },
+                { type: 4, price: 60, color: 'green', sales: 200, name: '老式茶杯' },
+                { type: 3, price: 50, color: 'green', sales: 600, name: '欧式印花杯' }]
+		var ul = document.querySelector('ul');
+		var upBtn = document.querySelector('.up');
+		var downBtn = document.querySelector('.down');
+
+		// const sortLi = () => {
+		// 	ul.innerText = JSON.stringify(cups)
+		// }
+		// sortLi()
+		
+		upBtn.onclick = function() {
+			cups.sort((a, b) => a.sales - b.sales)
+			// sortLi()
+		}
+		downBtn.onclick = function() {
+			cups.sort((a, b) => b.sales - a.sales)
+			// sortLi()
+		}
+
+		/**
+		 * 两数之和
+		 * @param {number[]} nums
+		 * @param {number} target
+		 * @return {number[]}
+		 */
+		const twoSum = (nums, target) => {
+			for(i = 0; i < nums.length; i++) {
+				for(j = i+1; j < nums.length; j++) {
+					if(nums[i] + nums[j] === target) return [i, j]
+				}
+			}
+		};
+		console.log(twoSum([1,3,3], 6))
+
+		/**
+		 * 判断回文数
+		 * @param {number} x
+		 * @return {boolean}
+		 */
+		const isPalindrome = function(x) {
+			const list = x.toString().split('')
+			const reverseList = x.toString().split('').reverse()
+			return JSON.stringify(list) === JSON.stringify(reverseList)
+		};
+		console.log(isPalindrome(-121))	
+
+		/**
+		 * 请补全JavaScript代码，完成类的继承。要求如下：
+				1. "Chinese"类继承于"Human"类
+				2. "Human"类实现一个函数"getName"，返回该实例的"name"属性
+				3. "Chinese"类构造函数有两个参数，分别为"name"、"age"
+				4. "Chinese"类实现一个函数"getAge"，返回该实例的"age"属性
+		 * 
+		 * */
+		class Human {
+			constructor(name) {
+					this.name = name
+					this.kingdom = 'animal'
+					this.color = ['yellow', 'white', 'brown', 'black']
+			}
+			// 补全代码
+			getName() {
+				return this.name
+			}
+		}
+		// 补全代码
+		class Chinese extends Human {
+			constructor(name, age) {
+				super(name)
+				this.age = age
+			}
+			getAge() {
+				return this.age
+			}
+		}
+		const obj = new Chinese('human', 20)
+		console.log(obj)
+
+		// 分页
+		const creactPage = (allItem, pageItem) => {
+			const count = Math.ceil(allItem/pageItem)
+			let str = ''
+			for(i = 0; i < count; i ++) {
+				str += `<li>${i+1}</li>`
+			}
+			ul.innerHTML = str
+		}
+		creactPage(17, 2)
+
+		/**
+		 * 请补全JavaScript代码，要求将数组参数中的对象以总成绩(包括属性"chinese"、"math"、"english")从高到低进行排序并返回。
+		 * */
+		const _rank = array => {
+			// 补全代码
+			return array.sort((a, b) => {
+				const aCount = a.chinese + a.math + a.english
+				const bCount = b.chinese + b.math + b.english
+				return bCount - aCount
+			})
+		}
+		console.log(_rank([
+			{
+				chinese: 77,
+				math: 88,
+				english: 99
+			},{
+				chinese: 66,
+				math: 95,
+				english: 99
+			}
+		]))
+
+		// 判断target在str出现的次数
+		const _searchStrIndexOf = (str, target) => {
+			// 补全代码
+			const count = str.split(target).length - 1
+			console.log(count)
+		}
+		_searchStrIndexOf('fdafsf', 'f')
+
+		// 数组扁平化（数组降维）
+		const returnArr = (arr) => {
+			const newArr = []
+			const _returnArr = (arr) => {
+				arr.forEach(element => {
+					if(typeof element === 'number'){
+						newArr.push(element)
+					}else {
+						_returnArr(element)
+					}
+				});
+			}
+			_returnArr(arr)
+			return newArr
+		}
+		
+		console.log(returnArr([1, [2, 3, [4]]]))
+	</script>
 </html>
