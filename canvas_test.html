@@ -11,7 +11,7 @@
         padding: 0;
       }
       #draw {
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 1);
       }
     </style>
   </head>
@@ -32,6 +32,8 @@
         const ctx = canvas.getContext("2d"); // 2d | webgl
         console.log(ctx);
 
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "white";
         ctx.fillRect(1, 1, 20, 20); // 绘制矩形fillRect(x轴起始位置, y轴起始位置, 宽, 高)
         ctx.save(); // 保存路径
         ctx.translate(120, 0); // 平移坐标系
@@ -107,6 +109,8 @@
         //   ctx.restore();
         // }
 
+        /**
+         * 
         // 时钟（秒针）requestAnimationFrame(fn)  接收回调函数，每秒钟执行60次，在下一次更新前执行
         requestAnimationFrame(drawSec);
         function drawSec() {
@@ -127,13 +131,121 @@
           ctx.restore();
           requestAnimationFrame(drawSec);
         }
+        **/
 
+        // 时钟
+        requestAnimationFrame(drawSec);
+        function drawSec() {
+          const seconds = new Date().getSeconds();
+          const minutes = new Date().getMinutes();
+          const hours = new Date().getHours();
+          ctx.clearRect(120, 0, 160, 160); // 清空画布
+          ctx.save();
+
+          // 时钟背景
+          ctx.translate(210, 80); // 时钟中心点
+          ctx.save();
+          ctx.fillStyle = "white";
+          ctx.beginPath();
+          ctx.arc(0, 0, 80, 0, Math.PI * 360);
+          ctx.fill();
+          ctx.restore();
+
+          // 绘制数字
+          ctx.save();
+          ctx.fillStyle = "black";
+          ctx.font = "20px fangsong";
+          ctx.textBaseline = "middle";
+          ctx.textAlign = "center";
+          const numbers = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2];
+          numbers.forEach((item, index) => {
+            const x = Math.cos(((Math.PI * 2) / 12) * index) * 65;
+            const y = Math.sin(((Math.PI * 2) / 12) * index) * 65;
+            ctx.fillText(item, x, y);
+          });
+          ctx.restore();
+
+          // 绘制刻度
+          ctx.save();
+          // 时点刻度
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = "black";
+          for (let i = 0; i < 12; i++) {
+            ctx.rotate((Math.PI * 2) / 12);
+            ctx.beginPath();
+            ctx.moveTo(80, 0);
+            ctx.lineTo(75, 0);
+            ctx.stroke();
+          }
+          // 分秒刻度
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = "black";
+          for (let i = 0; i < 60; i++) {
+            ctx.rotate((Math.PI * 2) / 60);
+            ctx.beginPath();
+            ctx.moveTo(80, 0);
+            ctx.lineTo(77, 0);
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          // （时针）
+          ctx.save();
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = 2;
+          ctx.linCap = "round";
+          ctx.rotate(((Math.PI * 2) / 12) * hours);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -35);
+          ctx.stroke();
+          ctx.restore();
+
+          // （分针）
+          ctx.save();
+          ctx.strokeStyle = "black";
+          ctx.rotate(((Math.PI * 2) / 60) * minutes);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -50);
+          ctx.stroke();
+          ctx.restore();
+
+          // 开始绘制（秒针）
+          ctx.save();
+          ctx.strokeStyle = "red";
+          ctx.rotate(((Math.PI * 2) / 60) * seconds);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -70);
+          ctx.stroke();
+          ctx.restore();
+
+          // 绘制中心点
+          ctx.save();
+          ctx.fillStyle = "black";
+          ctx.beginPath();
+          ctx.arc(0, 0, 5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "rgba(255, 255, 255, .6)";
+          ctx.beginPath();
+          ctx.arc(0, 0, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "black";
+          ctx.beginPath();
+          ctx.arc(0, 0, 1, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          ctx.restore();
+          requestAnimationFrame(drawSec);
+        }
         // 旋转动画
         requestAnimationFrame(drawAnimation);
         function drawAnimation() {
           const seconds = new Date().getSeconds();
           const millSeconds = new Date().getMilliseconds();
-          ctx.clearRect(0, 140, 200, 200);
+          ctx.clearRect(0, 140, 155, 200);
           ctx.save();
 
           // 绘制中心圆
@@ -163,6 +275,9 @@
           ctx.beginPath();
           ctx.arc(0, 0, 7, 0, Math.PI * 2);
           ctx.fill();
+          ctx.fillStyle = "rgba(0, 0, 0, .2)";
+          ctx.beginPath();
+          ctx.fillRect(0, -7, 18.5, 14);
 
           // 绘制绕轨道圆的圆
           ctx.rotate(
