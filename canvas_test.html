@@ -216,7 +216,7 @@
           ctx.strokeStyle = "red";
           ctx.rotate(((Math.PI * 2) / 60) * seconds);
           ctx.beginPath();
-          ctx.moveTo(0, 0);
+          ctx.moveTo(0, 10);
           ctx.lineTo(0, -70);
           ctx.stroke();
           ctx.restore();
@@ -235,6 +235,10 @@
           ctx.beginPath();
           ctx.arc(0, 0, 1, 0, Math.PI * 2);
           ctx.fill();
+          ctx.strokeStyle = "red";
+          ctx.beginPath();
+          ctx.arc(0, 0, 3, 0, Math.PI * 2);
+          ctx.stroke();
           ctx.restore();
 
           ctx.restore();
