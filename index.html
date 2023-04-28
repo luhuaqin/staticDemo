@@ -290,10 +290,10 @@
 			const newArr = []
 			const _returnArr = (arr) => {
 				arr.forEach(element => {
-					if(typeof element === 'number'){
-						newArr.push(element)
-					}else {
+					if(typeof element === 'object'){
 						_returnArr(element)
+					}else {
+						newArr.push(element)
 					}
 				});
 			}
@@ -301,6 +301,6 @@
 			return newArr
 		}
 		
-		console.log(returnArr([1, [2, 3, [4]]]))
+		console.log(returnArr(['1', [2, 'b', [4]]]))
 	</script>
 </html>

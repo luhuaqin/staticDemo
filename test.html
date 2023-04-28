@@ -2,6 +2,27 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <style>
+          div.father {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+          }
+          div.child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: transparent;
+            backdrop-filter: blur(6px);
+          }
+          div.father img {
+            filter: blur(6px);
+          }
+        </style>
     </head>
     <body>
         <select name="" id="">
@@ -16,6 +37,13 @@
             <li>老式茶杯</li>
             <li>欧式印花杯</li>
         </ul>
+        <div class="father">
+          <img src="./img/big.jpg" width="100%" height="100%" />
+          <div class="child"></div>
+        </div>
+        <div class="father">
+          <img src="./img/big.jpg" width="100%" height="100%" />
+        </div>
 
         <script>
             var cups = [
@@ -44,6 +72,22 @@
                   ul.innerHTML = cups.map(item => `<li>${item.name}</li>`).join('');
                     break;
               }
+            }
+
+
+            const arr = [
+              { classId: "1", name: "张三", age: 16 },
+              { classId: "1", name: "李四", age: 15 },
+              { classId: "3", name: "赵六", age: 15 },
+              { classId: "2", name: "王五", age: 16 },
+              { classId: "2", name: "孔七", age: 16 }
+            ]; 
+
+            // groupArrayByKey(arr, "classId");
+            console.log(groupArrayByKey(arr, "classId")); 
+
+            function groupArrayByKey(arr = [], key) {
+                return arr.reduce((t, v) => (!t[v[key]] && (t[v[key]] = []), t[v[key]].push(v), t), {})
             }
         </script>
     </body>

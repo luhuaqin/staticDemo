@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    svg {
+      background-color: rgba(255, 0, 0, .1);
+    }
+  </style>
+</head>
+<body>
+  <!-- svg样式优先级：内联style > defs style > 外部（head）style > 属性 -->
+  <svg width="100" height="100">
+    <circle cx="25" cy="25" r="25" />
+  </svg>
+  <!-- viewBox：视口框，"可见起始x 可见起始y 宽 高" -->
+  <!-- 视口框的宽高比，和viewport视口的宽高比（width/height）相等时，svg内元素会等比缩放到视口可见宽度；
+       不相等时svg内元素会以自身的比例缩放到视口框的最大可见宽高，并且居中在svg元素内。
+        preserveAspectRatio: 保持纵横比
+   -->
+  <svg width="100" height="100" viewBox="0 0 50 50">
+    <circle cx="25" cy="25" r="25" />
+  </svg>
+  <svg width="100" height="100" viewBox="25 25 50 50">
+    <circle cx="25" cy="25" r="25" />
+  </svg>
+  <svg width="100" height="100" viewBox="50 0 100 100">
+    <circle cx="50" cy="50" r="50" />
+  </svg>
+  <svg width="100" height="100" viewBox="0 0 100 200">
+    <circle cx="50" cy="50" r="50" />
+  </svg>
+  <svg width="100" height="100" viewBox="0 0 100 200">
+    <circle cx="50" cy="50" r="50" />
+  </svg>
+  <svg width="100" height="100" viewBox="0 0 100 200">
+    <ellipse cx="50" cy="50" rx="50" ry="25" />
+  </svg>
+  <svg width="100" height="100" viewBox="0 0 100 200">
+    <rect x="0" y="0" width="100" height="50" rx="15" ry="20" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- x1，y1: 起点坐标；x2，y2：终点坐标，两边端点样式stroke-linecap: round/butt/square，线段连接处stroke-linejoin: miter/round/bevel，虚线stroke-dasharray: 'number,(...number)'(如只有一个数字，代表线和空隙的长度都相等；两个数字时第一个数字表示线段长度、第二个数字表示空隙长度；如果多个数字则线段和空隙与数字对应，数字不够线段长度时从头循环)。stroke-dashoffset: 表示线段偏移量 -->
+    <line x1="10" y1="10" x2="10" y2="60" stroke="red" stroke-width="3" stroke-linecap="round" />
+
+    <line x1="20" y1="10" x2="20" y2="60" stroke="red" stroke-width="3" stroke-dasharray="6" />
+
+    <line x1="30" y1="10" x2="30" y2="60" stroke="red" stroke-width="3" stroke-dasharray="25" />
+    
+    <line x1="40" y1="10" x2="40" y2="60" stroke="red" stroke-width="3" stroke-dasharray="25" stroke-dashoffset="10" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- 折线 -->
+    <polyline points="0 0, 25 25, 0 25" stroke="red" fill="transparent" stroke-linejoin="round" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- 折线 -->
+    <polyline points="0 0, 25 25, 50 0, 75 25" fill="transparent" stroke="red" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- 多边形(和折线很像，收尾两个点会闭合) -->
+    <polygon points="0 0, 25 25, 50 0, 75 25" fill="transparent" stroke="red" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- 路径: M: moveTo（移到开始位置） -->
+    <path d="M 0 0, 25 25, 50 0, 75 25" fill="transparent" stroke="red" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- 闭合路径: Z: ...（闭合路径）, L/l: lineTo（画到某位置，可以省略不写，大写代表绝对定位（画布），小写相对定位（相对上一个点）） -->
+    <path d="M 0 0, L 25 25, L 50 0, L 75 25 Z" fill="transparent" stroke="red" />
+  </svg>
+  <svg width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- width/height: 为0时图片不展示；不写时为图片大小；
+         x/y：默认为0，0点；
+         xlink:href属性为了兼容版本svg1，不写也不影响，目前大部分浏览器已经兼容svg2
+     -->
+    <image href="./img/small.jpg" xlink:href="./img/small.jpg" x="25" y="25" width="50" height="50" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- 
+      text-anchor: 文本对齐方式（横向）
+      dominant-baseline: auto/middle/hanging，默认auto基线对齐方式（纵向）
+     -->
+    <text x="25" y="25" font-size="30" fill="red" text-anchor="middle" dominant-baseline="middle">Ay</text>
+  </svg>
+  <svg width="100" height="100">
+    <!-- 在text内部嵌套字体，用于处理不同文本的显示效果 -->
+    <text x="10" y="10" font-size="30" dominant-baseline="hanging">
+      Ay 
+      <tspan fill="red">30</tspan>
+    </text>
+  </svg>
+  <svg width="100" height="100">
+    <circle cx="20" cy="20" r="10" fill="transparent" stroke="black"></circle>
+    <circle cx="35" cy="20" r="10" fill="transparent" stroke="black"></circle>
+    <circle cx="50" cy="20" r="10" fill="transparent" stroke="black"></circle>
+    <circle cx="65" cy="20" r="10" fill="transparent" stroke="black"></circle>
+    <!-- 图形组：可以将组内子元素相同的属性抽取到<g></g>中，子元素会继承。g元素只能写公共属性，不能写元素私有属性 -->
+    <g id="outAodi" fill="transparent" stroke="black">
+      <circle cx="20" cy="50" r="10"></circle>
+      <circle cx="35" cy="50" r="10"></circle>
+      <circle cx="50" cy="50" r="10"></circle>
+      <circle cx="65" cy="50" r="10"></circle>
+    </g>
+  </svg>
+  <!-- svg内部如果专门为了定义可复用svg元素，可将改svg隐藏 -->
+  <svg style="display: none;" width="100" height="100">
+    <!-- <defs>定义可复用元素，需要用<use>调用才生效，use可继承css属性，但是不是所有属性都会继承 -->
+    <defs>
+      <style>
+        rect {
+          fill: red;
+        }
+      </style>
+      <rect id="outRectangle" x="0" y="0" width="50" height="25" />
+
+      <g id="aodi" fill="transparent" stroke="black">
+        <circle cx="20" cy="50" r="10"></circle>
+        <circle cx="35" cy="50" r="10"></circle>
+        <circle cx="50" cy="50" r="10"></circle>
+        <circle cx="65" cy="50" r="10"></circle>
+      </g>
+    </defs>
+  </svg>
+  <svg width="100" height="100">
+    <!-- <defs>定义可复用元素，需要用<use>调用才生效，use可继承css属性，但是不是所有属性都会继承比如元素的宽高（只有svg和symbol元素会生效：有viewBox属性） -->
+    <defs>
+      <style>
+        rect {
+          fill: red;
+        }
+      </style>
+      <rect id="rectangle" x="0" y="0" width="50" height="25" />
+
+      <g id="aodi" fill="transparent" stroke="black">
+        <circle cx="20" cy="50" r="10"></circle>
+        <circle cx="35" cy="50" r="10"></circle>
+        <circle cx="50" cy="50" r="10"></circle>
+        <circle cx="65" cy="50" r="10"></circle>
+      </g>
+    </defs>
+    <use href="#rectangle" />
+    <!-- x/y相对复制元素的位置 -->
+    <use x="0" y="50" href="#rectangle" />
+    <use x="-10" y="-15" href="#aodi" />
+    <!-- 可以使用外部svg定义的svg -->
+    <use x="-10" y="35" href="#outAodi" />
+    <use x="50" href="#outRectangle" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- symbol和普通图形的区别：普通图形复用在use中设置宽高不生效，但是symbol会生效 -->
+    <polygon id="stop" points="0 0, 100 50, 0 100" fill="white" />
+  </svg>
+  <svg width="100" height="100">
+    <!-- symbol和普通图形的区别：普通图形复用在use中设置宽高不生效，但是symbol会生效 -->
+    <defs>
+      <g id="begin">
+        <rect x="20" width="20" height="100" fill="white" />
+        <rect x="60" width="20" height="100" fill="white" />
+      </g>
+    </defs>
+  </svg>
+  <svg width="100" height="100">
+    <!-- symbol和普通图形的区别：普通图形复用在use中设置宽高不生效，但是symbol会生效。symbol中的viewBox必须存在 -->
+    <symbol id="symbolStop" viewBox="0 0 100 100">
+      <path d="M 10 10, 90 50, 10 90 Z" fill="white" />
+    </symbol>
+  </svg>
+  <svg width="100" height="100">
+    <!-- symbol和普通图形的区别：普通图形复用在use中设置宽高不生效，但是symbol会生效。symbol中的viewBox必须存在 -->
+    <symbol id="symbolBegin" viewBox="0 0 100 100">
+      <g id="begin">
+        <rect x="20" y="10" width="20" height="80" style="fill: white" />
+        <rect x="60" y="10" width="20" height="80" style="fill: white" />
+      </g>
+    </symbol>
+  </svg>
+  <svg width="200" height="200">
+    <use href="#stop" />
+  </svg>
+  <svg width="200" height="200">
+    <use href="#symbolStop" />
+  </svg>
+  <svg width="200" height="200">
+    <use href="#symbolBegin" />
+  </svg>
+  <svg width="200" height="200">
+    <use href="#symbolStop" height="100" width="100" />
+  </svg>
+  <svg width="20" height="20">
+    <use href="#symbolBegin" />
+  </svg>
+  <svg width="20" height="20">
+    <use href="#symbolStop" />
+  </svg>
+
+  <svg width="100" height="100">
+    <!-- 渐变：可以设置多个stop。默认从左往右渐变，可以通过设置坐标点改变渐变方向，也可以设置渐变形变来改变渐变方向gradientTransform -->
+    <defs>
+      <linearGradient id="test_gradient">
+        <stop offset="0%" stop-color="pink" />
+        <stop offset="100%" stop-color="skyblue" />
+      </linearGradient>
+
+      <linearGradient id="test_gradient1" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%" stop-color="pink" />
+        <stop offset="100%" stop-color="skyblue" />
+      </linearGradient>
+
+      <linearGradient id="test_gradient2" gradientTransform="rotate(120)">
+        <stop offset="0%" stop-color="pink" />
+        <stop offset="100%" stop-color="skyblue" />
+      </linearGradient>
+    </defs>
+
+    <rect width="50" height="25" style="fill: url(#test_gradient)" />
+  </svg>
+  <svg width="100" height="100">
+    <rect width="50" height="25" style="fill: url(#test_gradient1)" />
+  </svg>
+  <svg width="100" height="100">
+    <rect width="50" height="25" style="fill: url(#test_gradient2)" />
+  </svg>
+  
+  <svg width="100" height="100" viewBox="0 0 100 100">
+    <path d="M 50 20, 50 60, 30 40, 50 60, 70 40" fill="transparent" stroke="blue" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <svg style="display: none;" width="100" height="100" viewBox="0 0 100 100">
+    <symbol id="line_down" viewBox="0 0 100 100">
+      <path d="M 50 20, 50 75, 25 50, 50 75, 75 50" fill="transparent" stroke="#417ff9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </svg>
+  <svg width="200" height="200">
+    <use href="#line_down" />
+  </svg>
+  <svg width="50" height="50">
+    <use href="#line_down" />
+  </svg>
+  <svg style="background: transparent;" width="20" height="20">
+    <use href="#line_down" />
+  </svg>
+</body>
+</html>
