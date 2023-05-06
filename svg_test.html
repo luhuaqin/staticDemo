@@ -9,9 +9,26 @@
     svg {
       background-color: rgba(255, 0, 0, .1);
     }
+    #line1 {
+      /* stroke-dashoffset: 如果要执行动画可以不写，在第一帧动画的时候设置即可 */
+      /* stroke-dashoffset: 40;  */
+      animation: line1A 2s linear;
+    }
+    @keyframes line1A {
+      0% {
+        stroke-dashoffset: 50;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+    #yes {
+      animation: line1A 1s linear;
+    }
   </style>
 </head>
 <body>
+  <!-- #region -->
   <!-- svg样式优先级：内联style > defs style > 外部（head）style > 属性 -->
   <svg width="100" height="100">
     <circle cx="25" cy="25" r="25" />
@@ -242,5 +259,67 @@
   <svg style="background: transparent;" width="20" height="20">
     <use href="#line_down" />
   </svg>
+  
+  <svg width="100" height="100">
+    <rect x="0" y="0" width="50" height="50" transform="translate(10, 10)" />
+  </svg>
+  <svg width="100" height="100">
+    <rect x="0" y="0" width="30" height="30" transform="translate(30, 0) rotate(45, 0, 0)" />
+  </svg>
+  <svg width="100" height="100">
+    <rect x="0" y="0" width="30" height="30" transform="translate(30, 0) scale(2)" />
+  </svg>
+  <svg width="100" height="100">
+    <rect x="0" y="0" width="30" height="30" transform="translate(30, 0) rotate(45, 0, 0) scale(2, 1)" />
+  </svg>
+  <!-- #endregion -->
+  <!-- line动画 -->
+  <svg width="100" height="100">
+    <line id="line1" x1="20" y1="10" x2="20" y2="60" stroke="red" stroke-width="3" stroke-dasharray="50"  />
+    <!-- 折线 -->
+    <polyline id="yes" points="30 35, 37 45, 53 32" fill="transparent" stroke-width="3" stroke="red" stroke-dasharray="40" />
+  </svg>
+  
+  <svg width="100" height="100">
+    <defs>
+      <style>
+        @keyframes lineA {
+          100% {
+            stroke-dashoffset: 0;
+          }
+        }
+        polyline#yesPath { 
+          fill: transparent;
+          stroke-width: 5;
+          stroke: #00ff68;
+          stroke-dasharray: 87;
+          stroke-dashoffset: 87;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          animation: lineA 1s linear forwards;
+        }
+      </style>
+      <symbol id="symbolYes" viewBox="0 0 100 100">
+        <polyline id="yesPath" points="20 40, 38 67, 80 32" />
+      </symbol>
+    </defs>
+  </svg>
+  <svg width="100" height="100">
+    <use href="#symbolYes" />
+  </svg>
+  <svg style="background-color: transparent;" width="30" height="30">
+    <use href="#symbolYes" />
+  </svg>
+  <script>
+    window.onload = function() {
+      getPathLengthById('yesPath')
+    }
+    const getPathLengthById = (id) => {
+      const svgEl = document.getElementById(id)
+      console.log(svgEl);
+      const pathLength = svgEl.getTotalLength();
+      console.log(svgEl, pathLength);
+    }
+  </script>
 </body>
 </html>

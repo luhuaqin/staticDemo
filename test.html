@@ -86,8 +86,17 @@
             // groupArrayByKey(arr, "classId");
             console.log(groupArrayByKey(arr, "classId")); 
 
+            // function groupArrayByKey(arr = [], key) {
+            //     return arr.reduce((t, v) => (!t[v[key]] && (t[v[key]] = []), t[v[key]].push(v), t), {})
+            // }
             function groupArrayByKey(arr = [], key) {
-                return arr.reduce((t, v) => (!t[v[key]] && (t[v[key]] = []), t[v[key]].push(v), t), {})
+              return arr.reduce((t, v) => {
+                if(!t[v[key]]) {
+                  t[v[key]] = []
+                }
+                t[v[key]].push(v)
+                return t
+              }, {})
             }
         </script>
     </body>
