@@ -302,5 +302,698 @@
 		}
 		
 		console.log(returnArr(['1', [2, 'b', [4]]]))
+
+		// 数组/树深层过滤
+		
+  
+		const handleFilterNotList = (notreadyListS = [], val) => {
+			const newChildren = []
+			// 结束递归的条件
+			if (!(notreadyListS && notreadyListS.length)) {
+				return []
+			}
+			for (const node of notreadyListS) {
+				//一、带父节点
+				// 1. 子孙节点中存在符合条件的，即 subs 数组中有值
+				// 2. 自己本身符合条件
+				const subs = this.handleFilterNotList(node.children, val)
+				if (node.na.includes(val)) {
+					node.children = subs // 如果不需要精细过滤，放开此处即可
+					newChildren.push(node)
+				} else if (subs && subs.length) {
+					node.children = subs
+					newChildren.push(node)
+				}
+				// 二、不带父节点
+				// if (node.na.includes(val)) {
+				//   newChildren.push(node)
+				//   node.children = this.handleFilterNotList(node.children, val)
+				// } else {
+				//   newChildren.push(...this.handleFilterNotList(node.children, val))
+				// }
+			}
+			return newChildren.length ? newChildren : []
+		}
+
+		
+		const aaaa = [
+			{
+					"idPar": "-1",
+					"idSrvca": "6046f8c1032e3d16a73e0332",
+					"path": "/-1/6046f8c1032e3d16a73e0332",
+					"na": "西药",
+					"children": [
+							{
+									"idPar": "6046f8c1032e3d16a73e0332",
+									"idSrvca": "60740803032e3d410fc7611d",
+									"path": "/-1/6046f8c1032e3d16a73e0332/60740803032e3d410fc7611d",
+									"na": "抗生素a",
+									"canAdd": "1",
+									"checked": true,
+									"title": "抗生素a",
+									"leaf": true,
+									"key": "60740803032e3d410fc7611d"
+							},
+							{
+									"idPar": "6046f8c1032e3d16a73e0332",
+									"idSrvca": "60988b15032e3d6159aff2b3",
+									"path": "/-1/6046f8c1032e3d16a73e0332/60988b15032e3d6159aff2b3",
+									"na": "毒麻药11",
+									"canAdd": "1",
+									"checked": true,
+									"title": "毒麻药11",
+									"leaf": true,
+									"key": "60988b15032e3d6159aff2b3"
+							},
+							{
+									"idPar": "6046f8c1032e3d16a73e0332",
+									"idSrvca": "61089d77032e3d57db2f5fb6",
+									"path": "/-1/6046f8c1032e3d16a73e0332/61089d77032e3d57db2f5fb6",
+									"na": "医技用药",
+									"canAdd": "1",
+									"checked": true,
+									"title": "医技用药",
+									"leaf": true,
+									"key": "61089d77032e3d57db2f5fb6"
+							},
+							{
+									"idPar": "6046f8c1032e3d16a73e0332",
+									"idSrvca": "625fab59032e3d1903f03799",
+									"path": "/-1/6046f8c1032e3d16a73e0332/625fab59032e3d1903f03799",
+									"na": "恩泽西药",
+									"canAdd": "1",
+									"checked": true,
+									"title": "恩泽西药",
+									"leaf": true,
+									"key": "625fab59032e3d1903f03799"
+							},
+							{
+									"idPar": "6046f8c1032e3d16a73e0332",
+									"idSrvca": "61de43fe0a6a9c2ea4a34d3e",
+									"path": "/-1/6046f8c1032e3d16a73e0332/61de43fe0a6a9c2ea4a34d3e",
+									"na": "超级明啊",
+									"canAdd": "1",
+									"checked": true,
+									"title": "超级明啊",
+									"leaf": true,
+									"key": "61de43fe0a6a9c2ea4a34d3e"
+							},
+							{
+									"idPar": "6046f8c1032e3d16a73e0332",
+									"idSrvca": "62046e93032e3d0a55ee273a",
+									"path": "/-1/6046f8c1032e3d16a73e0332/62046e93032e3d0a55ee273a",
+									"na": "临床试验",
+									"canAdd": "1",
+									"checked": true,
+									"title": "临床试验",
+									"leaf": true,
+									"key": "62046e93032e3d0a55ee273a"
+							}
+					],
+					"canAdd": "1",
+					"checked": true,
+					"leaf": false,
+					"title": "西药",
+					"key": "6046f8c1032e3d16a73e0332"
+			},
+			{
+					"idPar": "-1",
+					"idSrvca": "6046fa32032e3d16a73e05ea",
+					"path": "/-1/6046fa32032e3d16a73e05ea",
+					"na": "检查",
+					"children": [
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "604735ee032e3d16a7ab20d5",
+									"path": "/-1/6046fa32032e3d16a73e05ea/604735ee032e3d16a7ab20d5",
+									"na": "CT核磁1",
+									"children": [
+											{
+													"idPar": "604735ee032e3d16a7ab20d5",
+													"idSrvca": "611f7886032e3d382305df0f",
+													"path": "/-1/6046fa32032e3d16a73e05ea/604735ee032e3d16a7ab20d5/611f7886032e3d382305df0f",
+													"na": "CT",
+													"canAdd": "1",
+													"checked": true,
+													"title": "CT",
+													"leaf": true,
+													"key": "611f7886032e3d382305df0f"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "CT核磁1",
+									"leaf": false,
+									"key": "604735ee032e3d16a7ab20d5"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "6077de48032e3d3a0c253119",
+									"path": "/-1/6046fa32032e3d16a73e05ea/6077de48032e3d3a0c253119",
+									"na": "DR影像",
+									"canAdd": "1",
+									"checked": true,
+									"title": "DR影像",
+									"leaf": true,
+									"key": "6077de48032e3d3a0c253119"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "6080e082032e3d3a0cdc8e05",
+									"path": "/-1/6046fa32032e3d16a73e05ea/6080e082032e3d3a0cdc8e05",
+									"na": "B超你好世界你好世界",
+									"children": [
+											{
+													"idPar": "6080e082032e3d3a0cdc8e05",
+													"idSrvca": "6128472a032e3d57c7d0b896",
+													"path": "/-1/6046fa32032e3d16a73e05ea/6080e082032e3d3a0cdc8e05/6128472a032e3d57c7d0b896",
+													"na": "肾部",
+													"children": [
+															{
+																	"idPar": "6128472a032e3d57c7d0b896",
+																	"idSrvca": "6128475a032e3d57c7d0bc7c",
+																	"path": "/-1/6046fa32032e3d16a73e05ea/6080e082032e3d3a0cdc8e05/6128472a032e3d57c7d0b896/6128475a032e3d57c7d0bc7c",
+																	"na": "B超1-1",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "B超1-1",
+																	"leaf": true,
+																	"key": "6128475a032e3d57c7d0bc7c"
+															}
+													],
+													"canAdd": "1",
+													"checked": true,
+													"title": "肾部",
+													"leaf": false,
+													"key": "6128472a032e3d57c7d0b896"
+											},
+											{
+													"idPar": "6080e082032e3d3a0cdc8e05",
+													"idSrvca": "6128473d032e3d57c7d0b8b5",
+													"path": "/-1/6046fa32032e3d16a73e05ea/6080e082032e3d3a0cdc8e05/6128473d032e3d57c7d0b8b5",
+													"na": "腹部",
+													"canAdd": "1",
+													"checked": true,
+													"title": "腹部",
+													"leaf": true,
+													"key": "6128473d032e3d57c7d0b8b5"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "B超你好世界你好世界",
+									"leaf": false,
+									"key": "6080e082032e3d3a0cdc8e05"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "6080e093032e3d3a0cdc8f0b",
+									"path": "/-1/6046fa32032e3d16a73e05ea/6080e093032e3d3a0cdc8f0b",
+									"na": "心电图",
+									"children": [
+											{
+													"idPar": "6080e093032e3d3a0cdc8f0b",
+													"idSrvca": "611f78df032e3d382305e794",
+													"path": "/-1/6046fa32032e3d16a73e05ea/6080e093032e3d3a0cdc8f0b/611f78df032e3d382305e794",
+													"na": "急诊心电图",
+													"children": [
+															{
+																	"idPar": "611f78df032e3d382305e794",
+																	"idSrvca": "6246d441032e3d2523266d63",
+																	"path": "/-1/6046fa32032e3d16a73e05ea/6080e093032e3d3a0cdc8f0b/611f78df032e3d382305e794/6246d441032e3d2523266d63",
+																	"na": "心电图1-1",
+																	"children": [
+																			{
+																					"idPar": "6246d441032e3d2523266d63",
+																					"idSrvca": "624803d9032e3d4965db3067",
+																					"path": "/-1/6046fa32032e3d16a73e05ea/6080e093032e3d3a0cdc8f0b/611f78df032e3d382305e794/6246d441032e3d2523266d63/624803d9032e3d4965db3067",
+																					"na": "心电图1-1-1sdfsdfsfsdfsdfsd",
+																					"canAdd": "1",
+																					"checked": true,
+																					"title": "心电图1-1-1sdfsdfsfsdfsdfsd",
+																					"leaf": true,
+																					"key": "624803d9032e3d4965db3067"
+																			}
+																	],
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "心电图1-1",
+																	"leaf": false,
+																	"key": "6246d441032e3d2523266d63"
+															}
+													],
+													"canAdd": "1",
+													"checked": true,
+													"title": "急诊心电图",
+													"leaf": false,
+													"key": "611f78df032e3d382305e794"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "心电图",
+									"leaf": false,
+									"key": "6080e093032e3d3a0cdc8f0b"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "610cd2ba032e3d6bd2d60122",
+									"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122",
+									"na": "病理",
+									"children": [
+											{
+													"idPar": "610cd2ba032e3d6bd2d60122",
+													"idSrvca": "624802f3032e3d4965daf78a",
+													"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122/624802f3032e3d4965daf78a",
+													"na": "其他病理检查2",
+													"canAdd": "1",
+													"checked": true,
+													"title": "其他病理检查2",
+													"leaf": true,
+													"key": "624802f3032e3d4965daf78a"
+											},
+											{
+													"idPar": "610cd2ba032e3d6bd2d60122",
+													"idSrvca": "6253cfc3032e3d78a8b603d8",
+													"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122/6253cfc3032e3d78a8b603d8",
+													"na": "病理检查3",
+													"canAdd": "1",
+													"checked": true,
+													"title": "病理检查3",
+													"leaf": true,
+													"key": "6253cfc3032e3d78a8b603d8"
+											},
+											{
+													"idPar": "610cd2ba032e3d6bd2d60122",
+													"idSrvca": "618b9072032e3d23a5600997",
+													"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122/618b9072032e3d23a5600997",
+													"na": "常规病理检查",
+													"children": [
+															{
+																	"idPar": "618b9072032e3d23a5600997",
+																	"idSrvca": "61c81bc3032e3d1d51a2dbd3",
+																	"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122/618b9072032e3d23a5600997/61c81bc3032e3d1d51a2dbd3",
+																	"na": "病理检查1",
+																	"children": [
+																			{
+																					"idPar": "61c81bc3032e3d1d51a2dbd3",
+																					"idSrvca": "6246d36d032e3d2523265310",
+																					"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122/618b9072032e3d23a5600997/61c81bc3032e3d1d51a2dbd3/6246d36d032e3d2523265310",
+																					"na": "病理1-子111111111111111节点",
+																					"canAdd": "1",
+																					"checked": true,
+																					"title": "病理1-子111111111111111节点",
+																					"leaf": true,
+																					"key": "6246d36d032e3d2523265310"
+																			}
+																	],
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "病理检查1",
+																	"leaf": false,
+																	"key": "61c81bc3032e3d1d51a2dbd3"
+															},
+															{
+																	"idPar": "618b9072032e3d23a5600997",
+																	"idSrvca": "6200adb3032e3d5067f38588",
+																	"path": "/-1/6046fa32032e3d16a73e05ea/610cd2ba032e3d6bd2d60122/618b9072032e3d23a5600997/6200adb3032e3d5067f38588",
+																	"na": "台州病理",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "台州病理",
+																	"leaf": true,
+																	"key": "6200adb3032e3d5067f38588"
+															}
+													],
+													"canAdd": "1",
+													"checked": true,
+													"title": "常规病理检查",
+													"leaf": false,
+													"key": "618b9072032e3d23a5600997"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "病理",
+									"leaf": false,
+									"key": "610cd2ba032e3d6bd2d60122"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "620476bb032e3d0a55f1f757",
+									"path": "/-1/6046fa32032e3d16a73e05ea/620476bb032e3d0a55f1f757",
+									"na": "检查集中开单测试",
+									"children": [
+											{
+													"idPar": "620476bb032e3d0a55f1f757",
+													"idSrvca": "6204b090032e3d03caf75816",
+													"path": "/-1/6046fa32032e3d16a73e05ea/620476bb032e3d0a55f1f757/6204b090032e3d03caf75816",
+													"na": "子节点01",
+													"canAdd": "1",
+													"checked": true,
+													"title": "子节点01",
+													"leaf": true,
+													"key": "6204b090032e3d03caf75816"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "检查集中开单测试",
+									"leaf": false,
+									"key": "620476bb032e3d0a55f1f757"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "611f78a6032e3d382305e1b0",
+									"path": "/-1/6046fa32032e3d16a73e05ea/611f78a6032e3d382305e1b0",
+									"na": "多导心电图",
+									"children": [
+											{
+													"idPar": "611f78a6032e3d382305e1b0",
+													"idSrvca": "61b8674a032e3d2b6a79ed57",
+													"path": "/-1/6046fa32032e3d16a73e05ea/611f78a6032e3d382305e1b0/61b8674a032e3d2b6a79ed57",
+													"na": "多导",
+													"canAdd": "1",
+													"checked": true,
+													"title": "多导",
+													"leaf": true,
+													"key": "61b8674a032e3d2b6a79ed57"
+											},
+											{
+													"idPar": "611f78a6032e3d382305e1b0",
+													"idSrvca": "61b86710032e3d2b6a79e29a",
+													"path": "/-1/6046fa32032e3d16a73e05ea/611f78a6032e3d382305e1b0/61b86710032e3d2b6a79e29a",
+													"na": "多导1",
+													"canAdd": "1",
+													"checked": true,
+													"title": "多导1",
+													"leaf": true,
+													"key": "61b86710032e3d2b6a79e29a"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "多导心电图",
+									"leaf": false,
+									"key": "611f78a6032e3d382305e1b0"
+							},
+							{
+									"idPar": "6046fa32032e3d16a73e05ea",
+									"idSrvca": "61833565032e3d026d578f54",
+									"path": "/-1/6046fa32032e3d16a73e05ea/61833565032e3d026d578f54",
+									"na": "台州检查",
+									"canAdd": "1",
+									"checked": true,
+									"title": "台州检查",
+									"leaf": true,
+									"key": "61833565032e3d026d578f54"
+							}
+					],
+					"canAdd": "1",
+					"checked": true,
+					"leaf": false,
+					"title": "检查",
+					"key": "6046fa32032e3d16a73e05ea"
+			},
+			{
+					"idPar": "-1",
+					"idSrvca": "6046fafb032e3d16a73e081e",
+					"path": "/-1/6046fafb032e3d16a73e081e",
+					"na": "诊疗",
+					"canAdd": "1",
+					"checked": true,
+					"leaf": true,
+					"title": "诊疗",
+					"key": "6046fafb032e3d16a73e081e"
+			},
+			{
+					"idPar": "-1",
+					"idSrvca": "6046fb15032e3d16a73e081f",
+					"path": "/-1/6046fb15032e3d16a73e081f",
+					"na": "会诊",
+					"children": [
+							{
+									"idPar": "6046fb15032e3d16a73e081f",
+									"idSrvca": "6360e02c16fea5a0d767a04d",
+									"path": "/-1/6046fb15032e3d16a73e081f/6360e02c16fea5a0d767a04d",
+									"na": "院内会诊",
+									"canAdd": "1",
+									"checked": true,
+									"title": "院内会诊",
+									"leaf": true,
+									"key": "6360e02c16fea5a0d767a04d"
+							},
+							{
+									"idPar": "6046fb15032e3d16a73e081f",
+									"idSrvca": "6360e07016fea5a0d767aa60",
+									"path": "/-1/6046fb15032e3d16a73e081f/6360e07016fea5a0d767aa60",
+									"na": "远程会诊",
+									"canAdd": "1",
+									"checked": true,
+									"title": "远程会诊",
+									"leaf": true,
+									"key": "6360e07016fea5a0d767aa60"
+							},
+							{
+									"idPar": "6046fb15032e3d16a73e081f",
+									"idSrvca": "6360e04f16fea5a0d767a556",
+									"path": "/-1/6046fb15032e3d16a73e081f/6360e04f16fea5a0d767a556",
+									"na": "院外会诊",
+									"canAdd": "1",
+									"checked": true,
+									"title": "院外会诊",
+									"leaf": true,
+									"key": "6360e04f16fea5a0d767a556"
+							},
+							{
+									"idPar": "6046fb15032e3d16a73e081f",
+									"idSrvca": "611204b4032e3d345bbedf5b",
+									"path": "/-1/6046fb15032e3d16a73e081f/611204b4032e3d345bbedf5b",
+									"na": "会诊1",
+									"canAdd": "1",
+									"checked": true,
+									"title": "会诊1",
+									"leaf": true,
+									"key": "611204b4032e3d345bbedf5b"
+							}
+					],
+					"canAdd": "1",
+					"checked": true,
+					"leaf": false,
+					"title": "会诊",
+					"key": "6046fb15032e3d16a73e081f"
+			},
+			{
+					"idPar": "-1",
+					"idSrvca": "60e7b200032e3d3337763907",
+					"path": "/-1/60e7b200032e3d3337763907",
+					"na": "床位",
+					"canAdd": "1",
+					"checked": true,
+					"leaf": true,
+					"title": "床位",
+					"key": "60e7b200032e3d3337763907"
+			},
+			{
+					"idPar": "-1",
+					"idSrvca": "6046f958032e3d16a73e05e4",
+					"path": "/-1/6046f958032e3d16a73e05e4",
+					"na": "草药",
+					"children": [
+							{
+									"idPar": "6046f958032e3d16a73e05e4",
+									"idSrvca": "433057526224154624",
+									"path": "/-1/6046f958032e3d16a73e05e4/433057526224154624",
+									"na": "gezc1",
+									"canAdd": "1",
+									"checked": true,
+									"title": "gezc1",
+									"leaf": true,
+									"key": "433057526224154624"
+							},
+							{
+									"idPar": "6046f958032e3d16a73e05e4",
+									"idSrvca": "624e48dc032e3d38c6f00c76",
+									"path": "/-1/6046f958032e3d16a73e05e4/624e48dc032e3d38c6f00c76",
+									"na": "20220407新建",
+									"children": [
+											{
+													"idPar": "624e48dc032e3d38c6f00c76",
+													"idSrvca": "624e4901032e3d38c6f00cc7",
+													"path": "/-1/6046f958032e3d16a73e05e4/624e48dc032e3d38c6f00c76/624e4901032e3d38c6f00cc7",
+													"na": "20220407001新建",
+													"canAdd": "1",
+													"checked": true,
+													"title": "20220407001新建",
+													"leaf": true,
+													"key": "624e4901032e3d38c6f00cc7"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "20220407新建",
+									"leaf": false,
+									"key": "624e48dc032e3d38c6f00c76"
+							},
+							{
+									"idPar": "6046f958032e3d16a73e05e4",
+									"idSrvca": "61e8f391032e3d6ec221bd40",
+									"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40",
+									"na": "新增草药子节点",
+									"children": [
+											{
+													"idPar": "61e8f391032e3d6ec221bd40",
+													"idSrvca": "431178734798278656",
+													"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/431178734798278656",
+													"na": "Gezc",
+													"canAdd": "1",
+													"checked": true,
+													"title": "Gezc",
+													"leaf": true,
+													"key": "431178734798278656"
+											},
+											{
+													"idPar": "61e8f391032e3d6ec221bd40",
+													"idSrvca": "63f7166b6248ad0001d5cd66",
+													"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/63f7166b6248ad0001d5cd66",
+													"na": "4",
+													"canAdd": "1",
+													"checked": true,
+													"title": "4",
+													"leaf": true,
+													"key": "63f7166b6248ad0001d5cd66"
+											},
+											{
+													"idPar": "61e8f391032e3d6ec221bd40",
+													"idSrvca": "62553690b76d6c2de0c3d281",
+													"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/62553690b76d6c2de0c3d281",
+													"na": "我爱我饿饿人",
+													"canAdd": "1",
+													"checked": true,
+													"title": "我爱我饿饿人",
+													"leaf": true,
+													"key": "62553690b76d6c2de0c3d281"
+											},
+											{
+													"idPar": "61e8f391032e3d6ec221bd40",
+													"idSrvca": "620793c1032e3d36b3e6b8ad",
+													"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad",
+													"na": "新增子分类",
+													"children": [
+															{
+																	"idPar": "620793c1032e3d36b3e6b8ad",
+																	"idSrvca": "436672792459358208",
+																	"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/436672792459358208",
+																	"na": "测试一波插件",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "测试一波插件",
+																	"leaf": true,
+																	"key": "436672792459358208"
+															},
+															{
+																	"idPar": "620793c1032e3d36b3e6b8ad",
+																	"idSrvca": "438507295322550272",
+																	"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/438507295322550272",
+																	"na": "test002",
+																	"children": [
+																			{
+																					"idPar": "438507295322550272",
+																					"idSrvca": "438799353973387264",
+																					"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/438507295322550272/438799353973387264",
+																					"na": "test00275",
+																					"canAdd": "1",
+																					"checked": true,
+																					"title": "test00275",
+																					"leaf": true,
+																					"key": "438799353973387264"
+																			}
+																	],
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "test002",
+																	"leaf": false,
+																	"key": "438507295322550272"
+															},
+															{
+																	"idPar": "620793c1032e3d36b3e6b8ad",
+																	"idSrvca": "62e775561b7c452314bd322f",
+																	"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/62e775561b7c452314bd322f",
+																	"na": "123",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "123",
+																	"leaf": true,
+																	"key": "62e775561b7c452314bd322f"
+															},
+															{
+																	"idPar": "620793c1032e3d36b3e6b8ad",
+																	"idSrvca": "627cd440032e3d4b1f207f2e",
+																	"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/627cd440032e3d4b1f207f2e",
+																	"na": "wee",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "wee",
+																	"leaf": true,
+																	"key": "627cd440032e3d4b1f207f2e"
+															},
+															{
+																	"idPar": "620793c1032e3d36b3e6b8ad",
+																	"idSrvca": "642f7461994feb000118ebb8",
+																	"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/642f7461994feb000118ebb8",
+																	"na": "test001",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "test001",
+																	"leaf": true,
+																	"key": "642f7461994feb000118ebb8"
+															},
+															{
+																	"idPar": "620793c1032e3d36b3e6b8ad",
+																	"idSrvca": "431267543527792640",
+																	"path": "/-1/6046f958032e3d16a73e05e4/61e8f391032e3d6ec221bd40/620793c1032e3d36b3e6b8ad/431267543527792640",
+																	"na": "testnew分类",
+																	"canAdd": "1",
+																	"checked": true,
+																	"title": "testnew分类",
+																	"leaf": true,
+																	"key": "431267543527792640"
+															}
+													],
+													"canAdd": "1",
+													"checked": true,
+													"title": "新增子分类",
+													"leaf": false,
+													"key": "620793c1032e3d36b3e6b8ad"
+											}
+									],
+									"canAdd": "1",
+									"checked": true,
+									"title": "新增草药子节点",
+									"leaf": false,
+									"key": "61e8f391032e3d6ec221bd40"
+							},
+							{
+									"idPar": "6046f958032e3d16a73e05e4",
+									"idSrvca": "438176516268765184",
+									"path": "/-1/6046f958032e3d16a73e05e4/438176516268765184",
+									"na": "bbbbb",
+									"canAdd": "1",
+									"checked": true,
+									"title": "bbbbb",
+									"leaf": true,
+									"key": "438176516268765184"
+							}
+					],
+					"canAdd": "1",
+					"checked": true,
+					"leaf": false,
+					"title": "草药",
+					"key": "6046f958032e3d16a73e05e4"
+			},
+		]
+
+		console.log(handleFilterNotList(aaaa, '西'));
+
 	</script>
 </html>

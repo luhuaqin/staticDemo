@@ -98,6 +98,14 @@
                 return t
               }, {})
             }
+
+            function calcStr(str, key) {
+              const str1 = str.toLowerCase()
+              const key1 = key.toLowerCase()
+              
+              console.log(str1.split(key1).length - 1)
+            }
+            calcStr('ACDrec', 'c')
         </script>
     </body>
 </html>

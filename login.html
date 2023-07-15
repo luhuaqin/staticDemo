@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/login.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="login-container">
+    <!-- <img src="./img/login_bg.png" class="login-bg" /> -->
+    <div class="login-bg"></div>
+    <div class="login-header">
+      <!-- <div class="login-logo"></div> -->
+      <div class="login-title"></div>
+    </div>
+    <div class="login-content">
+      <div class="login-card">
+        <!-- <div class="login-card-l"></div> -->
+        <div class="login-card-r">
+          <div class="login-tab">
+            <div class="login-tab-item" @click="tabItemClick('1')">
+              <div :class="{'login-tab-text': true, active: activeTab === '1'}">
+                欢迎登录
+              </div>
+            </div>
+            <div class="login-tab-item" @click="tabItemClick('2')">
+              <div
+                class="login-tab-text"
+                :class="{'login-tab-text': true, active: activeTab === '2'}"
+              >
+                证书登录
+              </div>
+            </div>
+          </div>
+          <div
+            v-show="activeTab === '1'"
+            :style="{marginTop: this.defaultTenant ? '40px' : '0'}"
+          >
+            <div class="login-fields">
+              <div class="login-field-wrap" v-show="!defaultTenant">
+                <input
+                  class="login-field"
+                  id="tid"
+                  @keydown.13="tidEnterClick"
+                  @input="changeVal"
+                  v-model="formData.tenantId"
+                  placeholder="请输入客户名"
+                />
+                <div class="login-field-icon left-icon icon-account"></div>
+              </div>
+              <div class="login-field-wrap">
+                <input
+                  class="login-field"
+                  id="uid"
+                  @keydown.13="uidEnterClick"
+                  @input="changeVal"
+                  v-model="formData.uid"
+                  placeholder="请输入用户名"
+                />
+                <div class="login-field-icon left-icon icon-user"></div>
+              </div>
+              <div class="login-field-wrap">
+                <input
+                  class="login-field"
+                  id="pwd"
+                  type="password"
+                  @keydown.13="pwdEnterClick"
+                  @input="changeVal"
+                  v-model="formData.pwd"
+                  placeholder="请输入密码"
+                />
+                <div class="login-field-icon left-icon icon-password"></div>
+              </div>
+              <div class="login-field-wrap">
+                <input
+                  class="login-field"
+                  @click="open"
+                  @blur="close"
+                  v-model="urtText"
+                  @input="urtInput"
+                  ref="selectRole"
+                  placeholder="请选择角色"
+                  @keydown.stop="ursKeydown"
+                  autocomplete="off"
+                  id="urt"
+                />
+                <div class="login-field-icon left-icon icon-role"></div>
+                <div
+                  class="login-field-icon right-icon icon-arrow"
+                  :class="{'up': expand}"
+                ></div>
+                <div
+                  class="dropdown-wrap"
+                  :class="{'expand': expand}"
+                  @keydown.stop="ursKeydown"
+                  id="ursWrap"
+                >
+                  <div class="dropdown" id="ursDropdown">
+                    <div
+                      v-for="(it,index) in urs"
+                      :key="it.ud_id || it.id"
+                      class="dropdown-item"
+                      :class="{'active': index === activeIndex}"
+                      @click="selectUrt(it)"
+                      :title="it.displayName"
+                    >
+                      {{formateUrtName(it)}}
+                    </div>
+                  </div>
+                </div>
+                <div class="login-field-error-text" v-show="errorInfo">
+                  {{errorInfo}}
+                </div>
+              </div>
+            </div>
+            <div class="rember-pwd">
+              <input
+                v-model="formData.rememberMe"
+                type="checkbox"
+                class="checkbox"
+                id="checkbox"
+              />
+              <label class="rember-pwd-label" for="checkbox">记住我</label>
+            </div>
+            <button @click="confirmBtnClick" class="login-btn" id="confirm">
+              登录
+            </button>
+          </div>
+          <div v-show="activeTab === '2'" class="qr-tab">
+            <div class="qr-subtitle">
+              <div class="qr-subtitle-text">扫一扫登录</div>
+              <div class="qr-refresh" @click="initQr">
+                <div class="icon-refresh"></div>
+                <div class="qr-refresh-text">刷新</div>
+              </div>
+            </div>
+            <div class="qr-wrap">
+              <div class="qr" id="qr-element"></div>
+              <div class="qr-mask" v-show="qrStatus !== '0'"></div>
+              <div class="qr-success qr-icon" v-show="qrStatus === '1'"></div>
+              <div class="qr-fail qr-icon" v-show="qrStatus === '2'"></div>
+            </div>
+            <div class="login-field-wrap urt-field" v-show="qrStatus === '1'">
+              <input
+                class="login-field"
+                @click="open"
+                @blur="close"
+                v-model="urtText"
+                @input="urtInput"
+                ref="selectRole"
+                placeholder="请选择角色"
+                @keydown.stop="ursKeydown"
+                autocomplete="off"
+                id="urt"
+              />
+              <div class="login-field-icon left-icon icon-role"></div>
+              <div
+                class="login-field-icon right-icon icon-arrow"
+                :class="{'up': expand}"
+              ></div>
+              <div
+                class="dropdown-wrap"
+                :class="{'expand': expand}"
+                @keydown.stop="ursKeydown"
+                id="ursWrap"
+              >
+                <div class="dropdown" id="ursDropdown">
+                  <div
+                    v-for="(it,index) in urs"
+                    :key="it.ud_id || it.id"
+                    class="dropdown-item"
+                    :class="{'active': index === activeIndex}"
+                    @click="selectUrt(it)"
+                    :title="it.displayName"
+                  >
+                    {{formateUrtName(it)}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login-footer">
+      <div class="login-footer-logo"></div>
+      <div class="login-footer-des">技术支持：创业慧康科技股份有限公司</div>
+    </div>
+  </div>
+</body>
+</html>
